@@ -8,6 +8,21 @@ class LoginPresenter extends GetxController {
 
   LoginWithGoogle loginWithGoogle;
 
+  String _email = '';
+  String _password = '';
+
+  void onEmailChanged(String email) {
+    _email = email;
+  }
+
+  void onPasswordChanged(String password) {
+    _password = password;
+  }
+
+  void onLoginWithEmail() {
+
+  }
+
   void onLoginWithGooglePressed() {
     loginWithGoogle.execute().then((user) {
       if (user != null) {
