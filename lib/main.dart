@@ -5,10 +5,12 @@ import 'package:movies_app/main/factories/pages/login_screen_factory.dart';
 import 'package:movies_app/ui/home/home_screen.dart';
 import 'package:movies_app/ui/login/login_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:movies_app/ui/utils/strings/string_resource.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  R.load();
   runApp(const MyApp());
 }
 
@@ -23,7 +25,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: LoginScreen.id,
+      initialRoute: HomeScreen.id,
       getPages: [
         GetPage(name: LoginScreen.id, page: makeLoginScreen),
         GetPage(name: HomeScreen.id, page: makeHomeScreen),

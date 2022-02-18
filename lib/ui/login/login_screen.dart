@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movies_app/presentation/login/login_presenter.dart';
+import 'package:movies_app/ui/utils/strings/string_resource.dart';
 import 'package:movies_app/ui/widgets/rounded_button.dart';
 import 'package:movies_app/ui/widgets/rounded_text_field.dart';
 
@@ -22,8 +23,8 @@ class LoginScreen extends StatelessWidget {
     presenter.showLoginFailed.listen((show) {
       if (show) {
         Get.snackbar(
-          'Ops',
-          'Ocorreu uma falha ao realizar o login',
+          R.string.loginFailTitle,
+          R.string.loginFailDescription,
           snackPosition: SnackPosition.BOTTOM,
         );
         presenter.showLoginFailed.value = false;
@@ -43,28 +44,28 @@ class LoginScreen extends StatelessWidget {
                 const SizedBox(height: 32),
                 Obx(
                   () => RoundedTextField(
-                    hintText: 'Email',
+                    hintText: R.string.loginEmail,
                     onChanged: presenter.onEmailChanged,
                     errorText: presenter.showEmailInvalid.value
-                        ? 'Ops, email invalido'
+                        ? R.string.loginEmailError
                         : null,
                   ),
                 ),
                 const SizedBox(height: 16),
                 Obx(
                   () => RoundedTextField(
-                    hintText: 'Senha',
+                    hintText: R.string.loginPassword,
                     obscureText: true,
                     onChanged: presenter.onPasswordChanged,
                     errorText: presenter.showPasswordInvalid.value
-                        ? 'Senha precisa ter mais de 6 caracteres'
+                        ? R.string.loginEmailError
                         : null,
                   ),
                 ),
                 const SizedBox(height: 32),
                 Obx(
                   () => RoundedButton(
-                    text: 'Login',
+                    text: R.string.loginButton,
                     onPressed: presenter.loginButtonIsEnabled.value
                         ? presenter.onLoginWithEmail
                         : null,
@@ -74,7 +75,7 @@ class LoginScreen extends StatelessWidget {
                 const Divider(thickness: 1),
                 const SizedBox(height: 32),
                 RoundedButton(
-                  text: 'Login com Google',
+                  text: R.string.loginGoogleButton,
                   onPressed: presenter.onLoginWithGooglePressed,
                 ),
               ],
