@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:movies_app/main/factories/pages/home_screen_factory.dart';
 import 'package:movies_app/main/factories/pages/login_screen_factory.dart';
+import 'package:movies_app/ui/home/home_screen.dart';
 import 'package:movies_app/ui/login/login_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -23,7 +25,8 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: LoginScreen.id,
       getPages: [
-        GetPage(name: LoginScreen.id, page: makeLoginScreen)
+        GetPage(name: LoginScreen.id, page: makeLoginScreen),
+        GetPage(name: HomeScreen.id, page: makeHomeScreen),
       ],
     );
   }

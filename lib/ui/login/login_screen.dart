@@ -1,4 +1,8 @@
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:movies_app/presentation/login/login_presenter.dart';
 import 'package:movies_app/ui/widgets/rounded_button.dart';
 import 'package:movies_app/ui/widgets/rounded_text_field.dart';
@@ -15,6 +19,17 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    presenter.showLoginFailed.listen((show) {
+      if (show) {
+        Get.snackbar(
+          'Ops',
+          'Ocorreu uma falha ao realizar o login',
+          snackPosition: SnackPosition.BOTTOM,
+        );
+        presenter.showLoginFailed.value = false;
+      }
+    });
+
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -26,18 +41,35 @@ class LoginScreen extends StatelessWidget {
                 const Icon(Icons.movie_outlined),
                 const Text('Movie App'),
                 const SizedBox(height: 32),
-                RoundedTextField(
-                  hintText: 'Email',
-                  onChanged: presenter.onEmailChanged,
+                Obx(
+                  () => RoundedTextField(
+                    hintText: 'Email',
+                    onChanged: presenter.onEmailChanged,
+                    errorText: presenter.showEmailInvalid.value
+                        ? 'Ops, email invalido'
+                        : null,
+                  ),
                 ),
                 const SizedBox(height: 16),
-                RoundedTextField(
-                  hintText: 'Senha',
-                  obscureText: true,
-                  onChanged: presenter.onPasswordChanged,
+                Obx(
+                  () => RoundedTextField(
+                    hintText: 'Senha',
+                    obscureText: true,
+                    onChanged: presenter.onPasswordChanged,
+                    errorText: presenter.showPasswordInvalid.value
+                        ? 'Senha precisa ter mais de 6 caracteres'
+                        : null,
+                  ),
                 ),
                 const SizedBox(height: 32),
-                RoundedButton(text: 'Login', onPressed: () {}),
+                Obx(
+                  () => RoundedButton(
+                    text: 'Login',
+                    onPressed: presenter.loginButtonIsEnabled.value
+                        ? presenter.onLoginWithEmail
+                        : null,
+                  ),
+                ),
                 const SizedBox(height: 32),
                 const Divider(thickness: 1),
                 const SizedBox(height: 32),

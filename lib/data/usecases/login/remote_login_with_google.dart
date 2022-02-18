@@ -13,7 +13,7 @@ class RemoteLoginWithGoogle extends LoginWithGoogle {
 
   @override
   Future<User?> execute() async {
-    try {
+
       final googleAccount = await googleSignIn.signIn();
       final googleAuth = await googleAccount?.authentication;
 
@@ -22,11 +22,8 @@ class RemoteLoginWithGoogle extends LoginWithGoogle {
         idToken: googleAuth?.idToken,
       );
 
-      final userCredential =
-          await firebaseAuth.signInWithCredential(googleCredential);
+      final userCredential = await firebaseAuth.signInWithCredential(googleCredential);
       return userCredential.user;
-    } catch(error) {
-      return null;
-    }
+
   }
 }
