@@ -38,6 +38,8 @@ dependencies:
   firebase_auth: ^3.3.7
   google_sign_in: ^5.2.3
   http: ^0.13.4
+  faker: 2.0.0
+  mocktail: ^0.2.0
 
 dev_dependencies:
   flutter_test:

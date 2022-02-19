@@ -58,13 +58,14 @@ class LoginScreen extends StatelessWidget {
                     obscureText: true,
                     onChanged: presenter.onPasswordChanged,
                     errorText: presenter.showPasswordInvalid.value
-                        ? R.string.loginEmailError
+                        ? R.string.loginPasswordError
                         : null,
                   ),
                 ),
                 const SizedBox(height: 32),
                 Obx(
                   () => RoundedButton(
+                    key: const Key('login_button'),
                     text: R.string.loginButton,
                     onPressed: presenter.loginButtonIsEnabled.value
                         ? presenter.onLoginWithEmail
@@ -75,6 +76,7 @@ class LoginScreen extends StatelessWidget {
                 const Divider(thickness: 1),
                 const SizedBox(height: 32),
                 RoundedButton(
+                  key: const Key('google_button'),
                   text: R.string.loginGoogleButton,
                   onPressed: presenter.onLoginWithGooglePressed,
                 ),
